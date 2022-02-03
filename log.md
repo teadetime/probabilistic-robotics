@@ -6,7 +6,7 @@
 
 
 Questions:
-- Discrete Bayes Filter -- What's this?
+- Discrete Bayes Filter -- What's https://www.youtube.com/watch?v=k6Dw0on6NtM
 
 
 Goals:
