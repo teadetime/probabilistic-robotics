@@ -1,4 +1,18 @@
 # Log of work done
+
+#### 2/23/22
+Was Sick last week but finished the Bayes example, but skimmed the mathematical derivation.
+Important note is that an implementation require 3 proability density functions:
+
+**initial belief p(x 0 ), the measurement probability p(z t | x t ),and the state transition probability p(x t | u t , x t−1 ).**
+
+**On the use of Bayes Filters**
+- Mostly theoretical since the assumptions made about complete state are not true.
+- Many algorithms try to approximate the belief/posterior, this involves choosing an alogrithm and trading off speed, accuracy, and complexity
+- Goal for tomorrow, write some C++ that actually Calculates beleifs if full state is known following some example exercises in the book
+- Next week or later tomorrow review multivariable gaussians and start looking at the kalman filter section of the book
+
+
 #### 2/9/22
 Didn't spend enough time in the last week working on this, will be adding another block to my calendar!
 Also need to sync with Paul but should have more to show!
