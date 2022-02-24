@@ -1,4 +1,10 @@
 # Log of work done
+#### 2/24/22
+Installed clion which automatically makes cmake files for use
+spent time trying to understasnd makefiles
+read through exercises from end of chapter
+Decided it  is not practical to make a bayes filter that calculates the predicted state with super basic knwons and instead would rather learn about kalman filter. This will be a goal for this weekend
+
 
 #### 2/23/22
 Was Sick last week but finished the Bayes example, but skimmed the mathematical derivation.
