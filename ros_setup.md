@@ -6,3 +6,7 @@ Gazebo installation and setup with ros2 gazebo pkgs [here](http://gazebosim.org/
 Also turtlebot setup [here](https://emanual.robotis.com/docs/en/platform/turtlebot3/quick-start/#pc-setup)
 
 We will be working off mapping [this](https://emanual.robotis.com/docs/en/platform/turtlebot3/simulation/#gazebo-simulation)
+
+
+Test mapping here:
+https://emanual.robotis.com/docs/en/platform/turtlebot3/slam_simulation/
