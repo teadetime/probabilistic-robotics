@@ -10,3 +10,19 @@ We will be working off mapping [this](https://emanual.robotis.com/docs/en/platfo
 
 Test mapping here:
 https://emanual.robotis.com/docs/en/platform/turtlebot3/slam_simulation/
+
+
+TO Save map:
+cd tbot3_ws
+. /install/setup.sh
+
+```
+ros2 launch turtlebot3_gazebo turtlebot3_world.launch.py
+
+ros2 launch turtlebot3_cartographer cartographer.launch.py use_sim_time:=True
+
+ros2 run turtlebot3_teleop teleop_keyboard
+
+ros2 run nav2_map_server map_saver_cli -f ~/map
+
+```
