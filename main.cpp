@@ -3,6 +3,8 @@
 #include <Eigen/Dense>
 #include <SDL.h>
 #include <SDL_image.h>
+
+#include <SDL_ttf.h>
 #include <stdio.h>
 #include <string>
 
@@ -89,6 +91,7 @@ public:             // Access specifier
 //Screen dimension constants
 const int SCREEN_WIDTH = 1024;
 const int SCREEN_HEIGHT = 512;
+TTF_Font* font;
 
 //Starts up SDL and creates window
 bool init();
@@ -156,6 +159,17 @@ bool init()
           success = false;
         }
       }
+    }
+    // Initialize SDL_ttf
+    if ( TTF_Init() < 0 ) {
+      cout << "Error intializing SDL_ttf: " << TTF_GetError() << endl;
+      success = false;
+    }
+    // Load font
+    font = TTF_OpenFont("/usr/share/fonts/truetype/lato/Lato-Bold.ttf", 20);
+    if ( !font ) {
+      cout << "Error loading font: " << TTF_GetError() << endl;
+      success = false;
     }
   }
 
@@ -340,16 +354,74 @@ int main() {
           sys.print_estimated_state();
         }
 
+        ///KEY
+        int key_y = 10;
+        int key_x = 10;
+        SDL_Rect dest;
+        SDL_Texture *text;
+        SDL_Color foreground = { 255, 0, 0 };
+        SDL_Surface* text_surf = TTF_RenderText_Solid(font, "True State", foreground);
+        text = SDL_CreateTextureFromSurface(gRenderer, text_surf);
+
+        dest.x = key_x; //- (text_surf->w / 2.0f);
+        dest.y = key_y;
+        dest.w = text_surf->w;
+        dest.h = text_surf->h;
+        SDL_RenderCopy(gRenderer, text, NULL, &dest);
+
+
+        SDL_Texture *text2;
+        SDL_Color foreground2 = { 0, 20, 255 };
+        SDL_Surface* text_surf2 = TTF_RenderText_Solid(font, "Prediction pre-measurement", foreground2);
+        text2 = SDL_CreateTextureFromSurface(gRenderer, text_surf2);
+        dest.x = key_x; //- (text_surf->w / 2.0f);
+        dest.y += text_surf->h;
+        dest.w = text_surf2->w;
+        dest.h = text_surf2->h;
+        SDL_RenderCopy(gRenderer, text2, NULL, &dest);
+
+
+        SDL_Color foreground3 = { 255, 150, 71 };
+        SDL_Surface* text_surf3 = TTF_RenderText_Solid(font, "Measurement", foreground3);
+        SDL_Texture *text3 = SDL_CreateTextureFromSurface(gRenderer, text_surf3);
+        dest.x = key_x; //- (text_surf->w / 2.0f);
+        dest.y += text_surf2->h;
+        dest.w = text_surf3->w;
+        dest.h = text_surf3->h;
+        SDL_RenderCopy(gRenderer, text3, NULL, &dest);
+
+        SDL_Color foreground4 = { 0, 255, 0 };
+        SDL_Surface* text_surf4 = TTF_RenderText_Solid(font, "Final Prediction and Covariance box", foreground4);
+        SDL_Texture *text4 = SDL_CreateTextureFromSurface(gRenderer, text_surf4);
+        dest.x = key_x; //- (text_surf->w / 2.0f);
+        dest.y += text_surf3->h;
+        dest.w = text_surf4->w;
+        dest.h = text_surf3->h;
+        SDL_RenderCopy(gRenderer, text4, NULL, &dest);
+
+
+        SDL_DestroyTexture(text);
+        SDL_FreeSurface(text_surf);
+        SDL_DestroyTexture(text2);
+        SDL_FreeSurface(text_surf2);
+        SDL_DestroyTexture(text3);
+        SDL_FreeSurface(text_surf3);
+        SDL_DestroyTexture(text4);
+        SDL_FreeSurface(text_surf4);
+
+
+
         // Draw Gridlines
-        //Horizontal
+        //Vertical
         for(int i = 0; i <= sys.walls(0); i ++){
-          SDL_SetRenderDrawColor( gRenderer, 0x00, 0x00, 0xFF, 0x8F );
+          SDL_SetRenderDrawColor( gRenderer, 0xAA, 0xAA, 0xAA, 0x2F );
           SDL_RenderDrawLine( gRenderer, i*SCREEN_WIDTH / sys.walls(0), 0, i*SCREEN_WIDTH / sys.walls(0), SCREEN_HEIGHT);
         }
-        //Vertical
+
+        //Horizontal
         for(int i = 0; i <= sys.walls(1); i ++){
           //Draw blue horizontal line
-          SDL_SetRenderDrawColor( gRenderer, 0x00, 0x00, 0xFF, 0x8F );
+          SDL_SetRenderDrawColor( gRenderer, 0xAA, 0xAA, 0xAA, 0x2F );
           SDL_RenderDrawLine( gRenderer, 0, i*SCREEN_HEIGHT / sys.walls(1), SCREEN_WIDTH, i*SCREEN_HEIGHT / sys.walls(1));
         }
 

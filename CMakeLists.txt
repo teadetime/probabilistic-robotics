@@ -7,5 +7,5 @@ include_directories(${SDL2_INCLUDE_DIRS})
 
 add_executable(kalman main.cpp)
 target_include_directories(kalman PRIVATE "/usr/include/eigen3")
-target_link_libraries(kalman ${SDL2_LIBRARIES} SDL2_image)
+target_link_libraries(kalman ${SDL2_LIBRARIES} SDL2_image SDL2_ttf)
 
